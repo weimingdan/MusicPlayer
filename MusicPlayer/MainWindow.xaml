@@ -21,6 +21,7 @@
         <local:MusicInfo x:Key="MyMusic" />
     </Window.Resources>
     <Grid>
+
         <!-- <Grid.ColumnDefinitions> -->
         <!--     <ColumnDefinition Width="250"/> -->
         <!-- </Grid.ColumnDefinitions> -->

@@ -242,6 +242,7 @@ namespace MusicPlayer
         }
         private DispatcherTimer timer = null;
 
+        //click button
         private void OnClickMe(object sender, RoutedEventArgs e)
         {
             MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
@@ -276,6 +277,7 @@ namespace MusicPlayer
 
         private void MediaElement_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
+            //there is something happend!
             var ss = e.ErrorException.ToString();
             int xx = 0;
         }
