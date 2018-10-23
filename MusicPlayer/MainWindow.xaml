@@ -1,0 +1,54 @@
+﻿<mah:MetroWindow x:Class="MusicPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicPlayer"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        Title="MainWindow" Height="458" Width="329">
+    <Window.Resources>
+        <local:MusicInfo x:Key="MyMusic" />
+    </Window.Resources>
+    <Grid>
+        <!-- <Grid.ColumnDefinitions> -->
+        <!--     <ColumnDefinition Width="250"/> -->
+        <!-- </Grid.ColumnDefinitions> -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <MediaElement x:Name="mediaElement" MediaFailed="MediaElement_OnMediaFailed" Source="G:\colorful.mp3" LoadedBehavior="Manual" MediaOpened="MediaElement_OnMediaOpened" Grid.Row="1" />
+        <Label Name="MusicName" Content="{Binding Path=MyMusicTest.MusicFullName}" Grid.Row="0" HorizontalAlignment="Left" Width="{Binding Path=ActualWidth,ElementName=BaseGrid}" />
+        <!-- <Image Name="MusicPic" Grid.Column="0" Grid.Row="1"/> -->
+        <Slider x:Name="MusicProgress" ValueChanged="MusicProgress_OnValueChanged" Grid.Row="2" Margin="0,10,0,20" />
+        <Grid Row="3" Margin="10,10,10,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button  Content="Mo" Grid.Column="0" Margin="0,0,5,0" />
+            <Button  Content="Pr" Grid.Column="1" Margin="0,0,5,0" />
+            <Button  Content="P" Name="PlayBtn" Click="OnClickMe" Grid.Column="2" Margin="0,0,5,0" />
+            <Button  Content="Ne" Grid.Column="3" Margin="0,0,5,0" />
+            <Button  Content="L" Grid.Column="4" />
+            <!-- <Button Name="CButton" Content="Click Me" Width="100" -->
+            <!--         ToolTip="click me to change my text" Click="OnClickMe" Grid.Column="3" /> -->
+        </Grid>
+    </Grid>
+</mah:MetroWindow>
