@@ -248,6 +248,7 @@ namespace MusicPlayer
             dev = DevEnum.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
 //            var mmdeviceCollection = DevEnum.EnumAudioEndpoints(DataFlow.Render, DeviceState.All);
 //            dev = mmdeviceCollection.First();
+            //this cause crash
             myAudioPlayer.Open("G:/afternoon.mp3", dev);
             myAudioPlayer.Play();
             timer = new DispatcherTimer();
