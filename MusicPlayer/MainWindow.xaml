@@ -44,10 +44,19 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Button  Content="Mo" Grid.Column="0" Margin="0,0,5,0" />
-            <Button  Content="Pr" Grid.Column="1" Margin="0,0,5,0" />
-            <Button  Content="P" Name="PlayBtn" Click="OnClickMe" Grid.Column="2" Margin="0,0,5,0" />
+            <!-- <Button  Content="Pr" Grid.Column="1" Margin="0,0,5,0" /> -->
+            <Button  Grid.Column="1" Margin="0,0,5,0" >
+                <Button.Content>
+                    <WrapPanel>
+                        <TextBlock Foreground="Blue" >M</TextBlock>
+                        <TextBlock Foreground="Green">C</TextBlock>
+                    </WrapPanel>
+                </Button.Content>
+            </Button>
+             
+                    <Button  Content="_P" Name="PlayBtn" Click="OnClickMe" Grid.Column="2" Margin="0,0,5,0" />
             <Button  Content="Ne" Grid.Column="3" Margin="0,0,5,0" />
-            <Button  Content="L" Grid.Column="4" />
+            <Button  Name="MusicList" Content="L" Grid.Column="4" />
             <!-- <Button Name="CButton" Content="Click Me" Width="100" -->
             <!--         ToolTip="click me to change my text" Click="OnClickMe" Grid.Column="3" /> -->
         </Grid>

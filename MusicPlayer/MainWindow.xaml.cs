@@ -23,6 +23,7 @@ using CSCore.Codecs;
 using CSCore.CoreAudioAPI;
 using CSCore.SoundOut;
 using System.Data;
+using Microsoft.Win32;
 
 namespace MusicPlayer
 {
@@ -180,6 +181,7 @@ namespace MusicPlayer
         private AudioPlayer myAudioPlayer;
         private SoundPlayer MyPlayer;
         private MMDevice dev;
+        private MediaPlayer mediaPlay;
         public MainWindow()
         {
             MyMusicTest = new MusicInfo();
@@ -188,6 +190,15 @@ namespace MusicPlayer
             this.DataContext = this;
             InitializeComponent();
             InitMusicInfo();
+            MusicList.MouseUp += OnMusicListButtonClicked;
+            mediaPlay = new MediaPlayer();
+  
+
+        }
+
+        private void OnMusicListButtonClicked(object sender, MouseButtonEventArgs e)
+        {
+            MusicList.Content = "GG";
         }
 
         public MusicInfo MyMusicTest
@@ -203,6 +214,8 @@ namespace MusicPlayer
             }
         }
 
+
+        //
         private void InitMusicInfo()
         {
             TagLib.File f = TagLib.File.Create("G:/afternoon.mp3");
@@ -245,16 +258,25 @@ namespace MusicPlayer
         //click button
         private void OnClickMe(object sender, RoutedEventArgs e)
         {
-            MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
-            dev = DevEnum.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
-//            var mmdeviceCollection = DevEnum.EnumAudioEndpoints(DataFlow.Render, DeviceState.All);
-//            dev = mmdeviceCollection.First();
+            //            MMDeviceEnumerator DevEnum = new MMDeviceEnumerator();
+            //            dev = DevEnum.GetDefaultAudioEndpoint(DataFlow.Capture, Role.Multimedia);
+            //            var mmdeviceCollection = DevEnum.EnumAudioEndpoints(DataFlow.Render, DeviceState.All);
+            //            dev = mmdeviceCollection.First();
             //this cause crash
-            myAudioPlayer.Open("G:/afternoon.mp3", dev);
-            myAudioPlayer.Play();
+            //            myAudioPlayer.Open("G:/afternoon.mp3", dev);
+            //            myAudioPlayer.Play();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "MP3 files (*.mp3)|*.mp3|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+                mediaPlay.Open(new Uri(openFileDialog.FileName));
+            
+//            mediaPlay.Play();
+            var mm = mediaPlay.NaturalDuration.TimeSpan.ToString();
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(timer_tick);
+            MusicProgress.Maximum = 100;
+
             timer.Start();
         }
 
@@ -268,7 +290,7 @@ namespace MusicPlayer
         }
         private void timer_tick(object sender, EventArgs e)
         {
-            MusicProgress.Value = 100;
+            MusicProgress.Value = mediaPlay.Position.Seconds;
         }
         private void MusicProgress_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
